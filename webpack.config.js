@@ -1,6 +1,8 @@
 const path = require("path");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+  target: 'node',
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
@@ -15,10 +17,6 @@ module.exports = {
           loader: "babel-loader"
         }
       },
-      // {
-      //   test:/\.css$/,
-      //   use: ['style-loader','css-loader']
-      // },
       {
         test: /\.(htm|html|css)$/,
         use: {
@@ -31,5 +29,8 @@ module.exports = {
       }
     ]
   },
-  mode: "development"
+  mode: "development",
+  plugins: [
+    new Dotenv()
+  ]
 };
