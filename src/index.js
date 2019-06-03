@@ -28,7 +28,14 @@ class GameDisplay extends React.Component {
 
   reload() {
     console.log("GameDisplay.reload: ", process.env.REACT_APP_API_BASE_URL);
-    fetch(process.env.REACT_APP_API_BASE_URL + '/world/get')
+    //process.env.REACT_APP_API_BASE_URL + '/world/get'
+    fetch('http://localhost:6060/world/get', {
+      //body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+    })
         .then(response => {
           const result = response.json();
           console.log("Result: >>>>> ", result);
