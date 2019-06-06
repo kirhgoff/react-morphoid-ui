@@ -4,6 +4,7 @@ class CanvasRenderer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: null, colorMap: props.colorMap };
+        console.log(">>>>>>>>>>>>>>>", this.state.colorMap.get("."));
     }
 
     componentDidMount() {
@@ -36,7 +37,7 @@ class CanvasRenderer extends React.Component {
     }
 
     updateCanvas() {
-        console.log("GameDisplay.updateCanvas");
+        console.log("GameDisplay.updateCanvas: state", this.state);
         const width = parseInt(this.state.width, 10);
         const height = parseInt(this.state.height, 10);
         const dataIn = this.state.data;
@@ -57,7 +58,12 @@ class CanvasRenderer extends React.Component {
 
         for (let indexIn = 0; indexIn < dataOut.length; indexIn ++) {
             if (dataIn[indexIn] !== '\n') {
-                const colors = this.state.colorMap[dataIn[indexIn]];
+                const symbol = dataIn[indexIn];
+                var colors = this.state.colorMap.get(symbol);
+                //TODO: fix it?
+                if (colors === undefined) {
+                    colors = this.state.colorMap.get(" ");
+                }
 
                 for (let dx = 0; dx < cellWidth; dx ++) {
                     for (let dy = 0; dy < cellHeight; dy ++) {

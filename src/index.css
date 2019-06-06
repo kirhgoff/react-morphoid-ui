@@ -52,3 +52,22 @@ ol, ul {
 .bordered {
   border: solid 1px black;
 }
+
+.no-discs {
+  list-style-type: none
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.legend div {
+  display: inline;
+  padding: 10px;
+}
+
+.sample {
+  width: 150px;
+}
