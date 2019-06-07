@@ -24,7 +24,7 @@ const typeNames = new Map([
 ]);
 
 
-function ControlPanel(props) {
+export default function ControlPanel(props) {
     return (
         <div>
             <CanvasRenderer colorMap={ colorMap }/>
@@ -32,5 +32,3 @@ function ControlPanel(props) {
         </div>
     );
 }
-
-export default ControlPanel;
