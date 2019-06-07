@@ -15,14 +15,14 @@ export default class LegendPanel extends React.Component {
 
     render() {
         return (
-            <ul className="no-discs legend">
+            <div className="legend bordered legend-width">
                 {this.state.colorMap.map(([key, value]) => (
-                    <li key={key}>
+                    <div>
                         <span className="bordered" style={{background: LegendPanel.colorFor(value)}}/>
                          {this.state.typeNames.get(key)}
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         );
     }
 }

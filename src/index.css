@@ -57,12 +57,14 @@ ol, ul {
   list-style: none
 }
 
-.legend ul {
-  display: inline-grid;
+.legend-width {
+  max-width: 130px;
 }
 
-.legend li {
-  margin-right: 10px;
+.legend div {
+  margin: 5px;
+  /*max-width: 200px; TODO: Why this does not work?*/
+
 }
 
 .legend span {
@@ -70,4 +72,7 @@ ol, ul {
   width: 12px;
   height: 12px;
   margin: 2px;
+}
+
+.test {
 }
