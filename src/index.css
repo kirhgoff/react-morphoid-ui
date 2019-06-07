@@ -54,20 +54,20 @@ ol, ul {
 }
 
 .no-discs {
-  list-style-type: none
+  list-style: none
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.legend ul {
+  display: inline-grid;
 }
 
-.legend div {
-  display: inline;
-  padding: 10px;
+.legend li {
+  margin-right: 10px;
 }
 
-.sample {
-  width: 150px;
+.legend span {
+  float: left;
+  width: 12px;
+  height: 12px;
+  margin: 2px;
 }

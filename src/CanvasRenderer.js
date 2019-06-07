@@ -4,7 +4,6 @@ class CanvasRenderer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: null, colorMap: props.colorMap };
-        console.log(">>>>>>>>>>>>>>>", this.state.colorMap.get("."));
     }
 
     componentDidMount() {
@@ -23,7 +22,7 @@ class CanvasRenderer extends React.Component {
         fetch('/world/get')
             .then(response => {
                 const result = response.json();
-                console.log("Result: >>>>> ", result);
+                //console.log("Result: >>>>> ", result);
                 return result;
             })
             .then(data => this.setState({
@@ -37,7 +36,7 @@ class CanvasRenderer extends React.Component {
     }
 
     updateCanvas() {
-        console.log("GameDisplay.updateCanvas: state", this.state);
+        // console.log("GameDisplay.updateCanvas: state", this.state);
         const width = parseInt(this.state.width, 10);
         const height = parseInt(this.state.height, 10);
         const dataIn = this.state.data;

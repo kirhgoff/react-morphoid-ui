@@ -1,6 +1,6 @@
 import React from 'react';
 
-class LegendPanel extends React.Component {
+export default class LegendPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -8,17 +8,21 @@ class LegendPanel extends React.Component {
             typeNames: this.props.typeNames
         };
     }
+
+    static colorFor(array) {
+        return "#" + array.slice(0, 3).map((num) => num.toString(16)).join('');
+    }
+
     render() {
         return (
-            <ul className="bordered no-discs">
+            <ul className="no-discs legend">
                 {this.state.colorMap.map(([key, value]) => (
-                    <li className="legend">
-                        <div className="bordered sample legend" style={{background: this.state.color}}>&nbsp;</div>
-                        <div className="legend">{this.state.typeNames.get(key)}</div>
+                    <li key={key}>
+                        <span className="bordered" style={{background: LegendPanel.colorFor(value)}}/>
+                         {this.state.typeNames.get(key)}
                     </li>
                 ))}
             </ul>
         );
     }
 }
-export default LegendPanel;
