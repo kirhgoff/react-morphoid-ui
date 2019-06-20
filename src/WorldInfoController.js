@@ -1,0 +1,38 @@
+import React from "react";
+import ControlPanel from "./ControlPanel";
+
+export default class WorldInfoController extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { data: null };
+    }
+
+    componentDidMount() {
+        setInterval( () => {this.reload()},1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    reload() {
+        fetch('/world/get')
+            .then(response => {
+                const result = response.json();
+                console.log("Result", result);
+                return result;
+            })
+            .then(payload => this.setState({payload: payload}))
+            .catch(function(error) {
+                console.log('Error: >>>', error);
+            });
+    }
+
+    render() {
+        const { data } = this.state;
+
+        return (
+            <ControlPanel data={data}/>
+        );
+    }
+}
