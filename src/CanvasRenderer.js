@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: created another renderer with that
 // const colorMap = new Map([
 //     [' ', ], // empty space
 //     ['+', [100, 100, 100, 255]], // corpse
@@ -16,7 +17,6 @@ const COLOR_NOTHING = [0, 0, 0, 255];
 export default function CanvasRenderer(props) {
 
     function prepareColors(data) {
-        console.log("Prepare colors for", data);
         function assignMax(storage, key, candidate) {
             if (storage[key] < candidate) storage[key] = candidate;
         }
@@ -40,16 +40,14 @@ export default function CanvasRenderer(props) {
                     "defiles": 0
                 });
 
-        console.log("Calculated extremes: ", extremes);
-
         return data.map((arr) => {
             const cellType = arr[0];
             if (cellType === "corpse") return COLOR_CORPSE;
             else if (cellType === "nothing") return COLOR_NOTHING;
             else {
-                const reproduces = arr[1];
-                const attacks = arr[2];
-                const photosynthesis = arr[3];
+                const reproduces = arr[1];      // r
+                const attacks = arr[2];         // g
+                const photosynthesis = arr[3];  // b
                 const defiles = arr[4];
 
                 const brightness = 250 * (1 - defiles/extremes["defiles"]);
@@ -63,10 +61,11 @@ export default function CanvasRenderer(props) {
         })
     }
 
+    // ctx - context to paint
     // width - number of cells on axis x
     // height - number of cells on axis y
-    // cells - array of color values, presented as [r, g, b, a]
-    function updateCanvas(ctx, width, height, colors) {
+    // pixels - array of color values, presented as [r, g, b, a]
+    function updateCanvas(ctx, width, height, pixels) {
         // console.log("GameDisplay.updateCanvas: state", this.state);
         const cellWidth = 10;
         const cellHeight = 10;
@@ -77,43 +76,53 @@ export default function CanvasRenderer(props) {
         //console.log("DEBUG: width: ", width, "height: ", height, "dataIn: ", dataIn);
 
         let imageData = ctx.getImageData(0,0, imageWidth, imageHeight);
-        let dataOut = imageData.data;
-
         let indexOut = 0;
 
-        // TODO: fix all that there is only one index
-        for (let indexIn = 0; indexIn < dataOut.length; indexIn ++) {
-            if (indexIn % width !== 0) {
-                const colors = colors[indexIn];
-                for (let dx = 0; dx < cellWidth; dx ++) {
-                    for (let dy = 0; dy < cellHeight; dy ++) {
-                        let cellIndex = indexOut + 4 * dx + 4 * imageWidth * dy;
-                        imageData.data[cellIndex] = colors[0]; // red
-                        imageData.data[cellIndex + 1] = colors[1]; // green
-                        imageData.data[cellIndex + 2] = colors[2]; // blue
-                        imageData.data[cellIndex + 3] = colors[3]; // alpha
-                    }
-                }
+        // TODO: fix empty first line
+        for (let pixelIndex = 0; pixelIndex < pixels.length; pixelIndex ++) {
 
+            const cellColors = pixels[pixelIndex];
+
+            // Scaling dx x dy
+            for (let dx = 0; dx < cellWidth; dx++) {
+                for (let dy = 0; dy < cellHeight; dy++) {
+
+                    let cellIndex = indexOut + 4 * dx + 4 * imageWidth * dy;
+
+                    imageData.data[cellIndex] = cellColors[0]; // red
+                    imageData.data[cellIndex + 1] = cellColors[1]; // green
+                    imageData.data[cellIndex + 2] = cellColors[2]; // blue
+                    imageData.data[cellIndex + 3] = cellColors[3]; // alpha
+                }
+            }
+            // if (pixelIndex % width !== 0) {
+            //     indexOut += 4 * cellWidth;
+            // } else {
+            //     indexOut += 4 * imageWidth * (cellHeight - 1);
+            // }
+            if (pixelIndex % width !== 0) {
                 indexOut += 4 * cellWidth;
             } else {
                 indexOut += 4 * imageWidth * (cellHeight - 1);
             }
+
         }
 
         ctx.putImageData(imageData, 0, 0);
     }
 
-    const { width, height, data, meta } = props.payload;
+    console.log("PAYLOAD:", props.payload);
+
     const canvasRef = React.useRef(null);
 
-    if (data) {
-        const colors = prepareColors(data); // TODO: pass meta to use min/max values?
+    if (props.payload) {
+        const {width, height, data} = props.payload; // TODO: return meta with min/max
 
-        //const ctx = this.refs.canvas.getContext('2d');
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        updateCanvas(ctx, width, height, colors);
+        if (data) {
+            const colors = prepareColors(data); // TODO: pass meta to use min/max values?
+            const ctx = canvasRef.current.getContext('2d');
+            updateCanvas(ctx, width, height, colors);
+        }
     }
 
     return (

@@ -4,7 +4,7 @@ import ControlPanel from "./ControlPanel";
 export default class WorldInfoController extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: null };
+        this.state = { payload: null };
     }
 
     componentDidMount() {
@@ -29,10 +29,10 @@ export default class WorldInfoController extends React.Component {
     }
 
     render() {
-        const { data } = this.state;
+        const { payload } = this.state;
 
         return (
-            <ControlPanel data={data}/>
+            <ControlPanel payload={payload}/>
         );
     }
 }
