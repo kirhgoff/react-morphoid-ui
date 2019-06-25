@@ -95,15 +95,14 @@ export default function CanvasRenderer(props) {
                     imageData.data[cellIndex + 3] = cellColors[3]; // alpha
                 }
             }
-            // if (pixelIndex % width !== 0) {
-            //     indexOut += 4 * cellWidth;
-            // } else {
-            //     indexOut += 4 * imageWidth * (cellHeight - 1);
-            // }
+            // we are moving right by 4*cellWidth
+            // when we reach right side, we go to the next line
+            // jumping down by cellHeight - 1
             if (pixelIndex % width !== 0) {
                 indexOut += 4 * cellWidth;
             } else {
-                indexOut += 4 * imageWidth * (cellHeight - 1);
+                // TODO: I dont know why -1 !!!
+                indexOut += 4 * imageWidth * cellHeight + 4 * cellWidth;
             }
 
         }
