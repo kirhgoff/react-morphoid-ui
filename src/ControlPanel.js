@@ -1,12 +1,12 @@
 import React from 'react';
 
-import CanvasRenderer from "./CanvasRenderer";
+import WorldView from "./WorldView";
 
 export default function ControlPanel(props) {
     const { payload } = props;
     return (
         <div>
-            <CanvasRenderer payload={ payload }/>
+            <WorldView payload={ payload }/>
         </div>
     );
 }

@@ -21,11 +21,20 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "file-loader": "^3.0.1",
     "jest": "^24.8.0",
+    "react-test-renderer": "^16.8.6",
     "style-loader": "^0.23.1",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ]
   }
 }
