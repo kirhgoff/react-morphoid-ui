@@ -1,3 +1,6 @@
+import PropTypes from "prop-types";
+import WorldView from "../WorldView";
+
 const COLOR_CORPSE = [100, 100, 100, 255];
 const COLOR_NOTHING = [0, 0, 0, 255];
 
@@ -5,7 +8,7 @@ function assignMax(storage, key, candidate) {
     if (storage[key] < candidate) storage[key] = candidate;
 }
 
-export default function generateColorsForWorld(data) {
+export default function ReproduceAttacksPhotoRGB(data) {
     const extremes = data
         .filter(arr => arr[0] === "cell")
         .reduce(
@@ -45,3 +48,7 @@ export default function generateColorsForWorld(data) {
         }
     })
 }
+
+ReproduceAttacksPhotoRGB.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any))
+};

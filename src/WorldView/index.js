@@ -1,17 +1,5 @@
 import React from 'react';
-import generateColorsForWorld from './generateColorsForWorld'
-
-// TODO: created another renderer with that
-// const colorMap = new Map([
-//     [' ', ], // empty space
-//     ['+', [100, 100, 100, 255]], // corpse
-//     ['*', [100, 200, 100, 255]], // reproduces
-//     ['x', [200, 100, 100, 255]], // attacks
-//     ['o', [200, 200, 100, 255]], // photosynthesis
-//     ['@', [200, 100, 200, 255]], // defiles
-//     ['.', [100, 200, 200, 255]], // weird
-// ]);
-
+import PropTypes from "prop-types";
 
 export default function WorldView(props) {
     // ctx - context to paint
@@ -70,16 +58,14 @@ export default function WorldView(props) {
         ctx.putImageData(imageData, 0, 0);
     }
 
-    const payload = props.payload;
-    console.log("PAYLOAD:", payload);
-
+    // Hooks go first
     const canvasRef = React.useRef(null);
 
-    if (payload) {
-        const {width, height, data} = payload; // TODO: return meta with min/max
+    if (props.payload) {
+        const {width, height, data} = props.payload; // TODO: return meta with min/max
 
         if (data) {
-            const colors = generateColorsForWorld(data); // TODO: pass meta to use min/max values?
+            const colors = props.paletteProvider(data);
             const ctx = canvasRef.current.getContext('2d');
             updateCanvas(ctx, width, height, colors);
         }
@@ -87,7 +73,6 @@ export default function WorldView(props) {
 
     return (
         <div>
-            <h1>Oh, brave new world!</h1>
             <canvas
                 id="canvas_01"
                 ref={canvasRef}
@@ -96,4 +81,14 @@ export default function WorldView(props) {
                 className="bordered"/>
         </div>
     );
-}
+};
+
+WorldView.propTypes = {
+    payload: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number,
+        data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any))
+    }),
+    paletteProvider: PropTypes.func.isRequired
+};
+

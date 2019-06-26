@@ -18,9 +18,7 @@ export default class WorldInfoController extends React.Component {
     reload() {
         fetch('/world/get')
             .then(response => {
-                const result = response.json();
-                console.log("Result", result);
-                return result;
+                return response.json();
             })
             .then(payload => this.setState({payload: payload}))
             .catch(function(error) {
