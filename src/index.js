@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ControlPanel from './ControlPanel'
-
 import './index.css';
 import './index.html';
 
+import WorldInfoController from "./WorldInfoController";
+
 ReactDOM.render(
-    <ControlPanel />,
+    <WorldInfoController />,
     document.getElementById('root')
 );

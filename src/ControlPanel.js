@@ -1,34 +1,32 @@
 import React from 'react';
 
-import CanvasRenderer from "./CanvasRenderer";
-import LegendPanel from "./LegendPanel";
-
-const colorMap = new Map([
-    [' ', [255, 255, 255, 255]], // empty space
-    ['+', [100, 100, 100, 255]], // corpse
-    ['*', [100, 200, 100, 255]], // reproduces
-    ['x', [200, 100, 100, 255]], // attacks
-    ['o', [200, 200, 100, 255]], // photosynthesys
-    ['@', [200, 100, 200, 255]], // defiles
-    ['.', [100, 200, 200, 255]], // weird
-]);
-
-const typeNames = new Map([
-    [' ', 'empty space'],
-    ['+', 'corpse'],
-    ['*', 'reproduces'],
-    ['x', 'attacks'],
-    ['o', 'photosynthesis'],
-    ['@', 'defiles'],
-    ['.', 'weirdo'],
-]);
-
+import WorldView from "./WorldView";
+import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
+import MaxKnownDNA from "./Palettes/MaxKnownDNA";
+import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
+import HealthIsBrightness from "./Palettes/HealthIsBrightness";
+import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLegend";
+import HealthIsBrightnessLegend from "./Palettes/HealthIsBrightnessLegend";
 
 export default function ControlPanel(props) {
+    const { payload } = props;
     return (
         <div>
-            <CanvasRenderer colorMap={ colorMap }/>
-            <LegendPanel colorMap={ Array.from(colorMap) } typeNames={ typeNames }/>
+            <h1>Oh, brave new world!</h1>
+            <div>
+                <div className="in-a-row">
+                    <WorldView payload={ payload } paletteProvider={ ReproduceAttacksPhotoRGB }/>
+                    <ReproduceAttackPhotoRGBLegend/>
+                </div>
+                <div className="in-a-row">
+                    <WorldView payload={ payload } paletteProvider={ MaxKnownDNA }/>
+                    <MaxKnownDNALegend/>
+                </div>
+                <div className="in-a-row">
+                    <WorldView payload={ payload } paletteProvider={ HealthIsBrightness }/>
+                    <HealthIsBrightnessLegend/>
+                </div>
+            </div>
         </div>
     );
 }
