@@ -23,11 +23,10 @@ export default function WorldView(props) {
             // we are moving right by 4*cellWidth
             // when we reach right side, we go to the next line
             // jumping down by cellHeight - 1
+            imageDataIndex += 4 * cellWidth;
 
-            if (inputDataIndex % fieldWidth !== 0) {
-                imageDataIndex += 4 * cellWidth;
-            } else {
-                imageDataIndex += 4 * imageWidth * cellHeight + 4 * cellWidth;
+            if ((inputDataIndex + 1) % fieldWidth === 0) {
+                imageDataIndex += 4 * imageWidth * (cellHeight - 1);
             }
             return imageDataIndex;
         }
