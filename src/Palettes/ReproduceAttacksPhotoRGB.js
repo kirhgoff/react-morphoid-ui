@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import WorldView from "../WorldView";
 
 const COLOR_CORPSE = [100, 100, 100, 255];
 const COLOR_NOTHING = [0, 0, 0, 255];
