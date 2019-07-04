@@ -1,32 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import CellDNARenderer from "./CellDNARenderer";
 
-export default class CellViewer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { x: 0, y: 0, payload: null };
-    }
+export default function CellViewer(props) {
+    const [payload, setPayload] = useState(null);
 
-    componentDidMount() {
-        this.fetchData();
-    }
+    const x = props.coords.x;
+    const y = props.coords.y;
 
-    fetchData() {
-        fetch('/entity/' + this.state.x + '/' + this.state.y)
+    if (payload === null || x !== payload.x || y !== payload.y) {
+        fetch('/entity/' + x + '/' + y)
             .then(response => {
                 return response.json();
             })
-            .then(payload => this.setState({payload: payload}))
-            .catch(function(error) {
+            .then(payload => setPayload(payload))
+            .catch(function (error) {
                 console.log('Error: >>>', error);
             });
     }
 
-    render() {
-        const { payload } = this.state;
-
-        return (
-            <CellDNARenderer payload={payload}/>
-        );
-    }
+    return (
+        <CellDNARenderer payload={payload}/>
+    );
 }

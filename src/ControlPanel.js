@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import WorldView from "./WorldView";
 import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
@@ -6,25 +6,33 @@ import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLeg
 import CellViewer from "./CellViewer";
 
 // import MaxKnownDNA from "./Palettes/MaxKnownDNA";
- import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
+// import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
 // import HealthIsBrightness from "./Palettes/HealthIsBrightness";
 // import HealthIsBrightnessLegend from "./Palettes/HealthIsBrightnessLegend";
+const CELL_SIZE_IN_PIXELS = 10;
 
 export default function ControlPanel(props) {
+    const [coords, setCoords] = useState({x: 0, y: 0});
     const {payload} = props;
+
     return (
         <div>
             <h1>Oh, brave new world!</h1>
             <div>
                 <div className="in-a-row">
                     <div className="in-a-row">
-                        <WorldView payload={payload} paletteProvider={ReproduceAttacksPhotoRGB}/>
+                        <WorldView style={{ border: '1px solid red' }}
+                            payload={ payload }
+                            paletteProvider={ ReproduceAttacksPhotoRGB }
+                            cellWidth={ CELL_SIZE_IN_PIXELS }
+                            cellHeight={ CELL_SIZE_IN_PIXELS }
+                            clickHandler={ coords => setCoords(coords) }
+                        />
                         <ReproduceAttackPhotoRGBLegend/>
-                        <MaxKnownDNALegend/>
                     </div>
                 </div>
                 <div className="in-a-row">
-                    <CellViewer x={5} y={6}/>
+                    <CellViewer coords={coords}/>
                 </div>
             </div>
         </div>

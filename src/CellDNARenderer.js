@@ -35,10 +35,8 @@ export default function CellDNARenderer(props) {
                     <li>direction: { direction }</li>
                     <li>genome:
                         <ul>
-                            {genome.map(gene => (
-                                <li>
-                                    <div key={gene}>{gene + description(gene)}</div>
-                                </li>
+                            {genome.map((gene, index) => (
+                                <li key={index}>{gene + description(gene)}</li>
                             ))}
                         </ul>
                     </li>
