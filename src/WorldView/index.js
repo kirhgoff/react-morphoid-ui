@@ -19,8 +19,8 @@ export default function WorldView(props) {
             return imageDataIndex;
         }
 
-        const cellWidth = 10;
-        const cellHeight = 10;
+        const cellWidth = props.cellWidth;
+        const cellHeight = props.cellHeight;
 
         let imageWidth = fieldWidth * cellWidth;
         let imageHeight = fieldHeight * cellHeight;
@@ -58,6 +58,17 @@ export default function WorldView(props) {
         ctx.putImageData(imageData, 0, 0);
     }
 
+    function translateClickToCell(event, canvas, cellClickHandler) {
+            const boundaries = canvas.getBoundingClientRect();
+            const x = event.clientX - boundaries.left;
+            const y = event.clientY - boundaries.top;
+
+            cellClickHandler({
+                x: Math.trunc(x / props.cellWidth),
+                y: Math.trunc(y / props.cellHeight)
+            })
+    }
+
     // Hooks go first
     const canvasRef = React.useRef(null);
 
@@ -72,14 +83,15 @@ export default function WorldView(props) {
     }
 
     return (
-        <div>
-            <canvas
-                id="canvas_01"
-                ref={canvasRef}
-                width={400}
-                height={400}
-                className="bordered"/>
-        </div>
+        <canvas
+            onClick={
+                (e) => translateClickToCell(e, canvasRef.current, props.clickHandler)
+            }
+            id="canvas_01"
+            ref={canvasRef}
+            width={400}
+            height={400}
+            className="bordered"/>
     );
 };
 
