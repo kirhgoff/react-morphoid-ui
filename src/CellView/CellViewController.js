@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CellDNARenderer from "./CellDNARenderer";
 
-export default function CellViewer(props) {
+export default function CellViewController(props) {
     function reload() {
         fetch('/entity/' + x + '/' + y)
             .then(response => {

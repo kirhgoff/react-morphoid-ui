@@ -1,7 +1,7 @@
 import React from "react";
-import ControlPanel from "./ControlPanel";
+import ControlPanel from "../ControlPanel";
 
-export default class WorldInfoController extends React.Component {
+export default class WorldViewController extends React.Component {
     constructor(props) {
         super(props);
         this.state = { payload: null };

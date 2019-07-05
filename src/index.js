@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './index.html';
 
-import WorldInfoController from "./WorldInfoController";
+import WorldViewController from "./WorldView/WorldViewController";
 
 ReactDOM.render(
-    <WorldInfoController />,
+    <WorldViewController />,
     document.getElementById('root')
 );

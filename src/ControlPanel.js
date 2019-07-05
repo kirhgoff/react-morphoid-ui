@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import WorldView from "./WorldView";
+import WorldView from "./WorldView/WorldViewRenderer";
 import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
 import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLegend";
-import CellViewer from "./CellViewer";
+import CellViewController from "./CellView/CellViewController";
 import MaxKnownDNA from "./Palettes/MaxKnownDNA";
 import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
 // import HealthIsBrightness from "./Palettes/HealthIsBrightness";
@@ -58,7 +58,7 @@ export default function ControlPanel(props) {
                 </div>
 
                 <div>
-                    <CellViewer coords={coords}/>
+                    <CellViewController coords={coords}/>
                 </div>
             </div>
         </div>

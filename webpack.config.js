@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   target: 'node',
-  entry: "./src/index.js",
+  entry: "./src/WorldViewRenderer.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build")
