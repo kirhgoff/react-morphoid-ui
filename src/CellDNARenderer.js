@@ -14,7 +14,7 @@ export default function CellDNARenderer(props) {
     function description(gene) {
         const value = KNOWN_GENES.get(gene);
         if (value !== undefined) {
-            return ": " + value
+            return value
         } else {
             return ""
         }
@@ -34,9 +34,12 @@ export default function CellDNARenderer(props) {
                     <li>health: { health }</li>
                     <li>direction: { direction }</li>
                     <li>genome:
-                        <ul>
+                        <ul className="genome no-discs">
                             {genome.map((gene, index) => (
-                                <li key={index}>{gene + description(gene)}</li>
+                                <li className="bordered" key={index}>
+                                    <div className="index">{index}</div>
+                                    <div className={"value " + description(gene)}>{description(gene) ? description(gene) : gene}</div>
+                                </li>
                             ))}
                         </ul>
                     </li>
