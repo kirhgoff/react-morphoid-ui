@@ -71,38 +71,39 @@ export default function WorldViewRenderer(props) {
 
     // Hooks go first
     const canvasRef = React.useRef(null);
-    const [coords, setCoords] = React.useState({x: 0, y: 0});
+    // const [coords, setCoords] = React.useState({x: 0, y: 0});
 
-    function drawCrosshair(ctx, height, width) {
+    function drawCrosshair(ctx, x, y, height, width) {
         ctx.beginPath();
-        ctx.moveTo(coords.x * props.cellWidth, 0);
-        ctx.lineTo(coords.x * props.cellWidth, height * props.cellHeight);
+        ctx.moveTo(x * props.cellWidth, 0);
+        ctx.lineTo(x * props.cellWidth, height * props.cellHeight);
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.moveTo((coords.x + 1) * props.cellWidth, 0);
-        ctx.lineTo((coords.x + 1) * props.cellWidth, height * props.cellHeight);
+        ctx.moveTo((x + 1) * props.cellWidth, 0);
+        ctx.lineTo((x + 1) * props.cellWidth, height * props.cellHeight);
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.moveTo(0, coords.y * props.cellHeight);
-        ctx.lineTo(width * props.cellWidth, coords.y * props.cellHeight);
+        ctx.moveTo(0, y * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, y * props.cellHeight);
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.moveTo(0, (coords.y + 1) * props.cellHeight);
-        ctx.lineTo(width * props.cellWidth, (coords.y + 1) * props.cellHeight);
+        ctx.moveTo(0, (y + 1) * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, (y + 1) * props.cellHeight);
         ctx.stroke();
     }
 
     if (props.payload) {
+        const {x, y} = props.coords;
         const {width, height, data} = props.payload; // TODO: return meta with min/max
 
         if (data) {
             const colors = props.paletteProvider(data);
             const ctx = canvasRef.current.getContext('2d');
             updateCanvas(ctx, width, height, colors);
-            drawCrosshair(ctx, height, width);
+            drawCrosshair(ctx, x, y, height, width);
         }
     }
 
@@ -112,7 +113,6 @@ export default function WorldViewRenderer(props) {
                 (e) => {
                     const result = translateClickToCell(e, canvasRef.current);
                     props.clickHandler(result);
-                    setCoords(result);
                 }
             }
             id="canvas_01"

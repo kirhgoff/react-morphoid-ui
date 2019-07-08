@@ -21,7 +21,7 @@ export default function ControlPanel(props) {
         <div>
             <h1>Oh, brave new world!</h1>
             <div>
-               2EARLY ACCESS: This server runs simulation of life.
+               EARLY ACCESS: This server runs simulation of life.
                Every cell of that field has its own DNA, which is like
                Turing machine - a set of 64 instructions to do basic
                actions on the field:
@@ -41,19 +41,18 @@ export default function ControlPanel(props) {
             <div className="main-view">
                 <div>
                     <WorldViewRenderer
+                        coords={ coords }
                         payload={ payload }
                         paletteProvider={ ReproduceAttacksPhotoRGB }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
                         cellHeight={ CELL_SIZE_IN_PIXELS }
-                        clickHandler={ coords => {
-                            console.log("Setting coords: ", coords);
-                            setCoords(coords)
-                        } }
+                        clickHandler={ coords => setCoords(coords) }
                     />
                     <ReproduceAttackPhotoRGBLegend/>
                 </div>
-                {/* <div>
+                <div>
                     <WorldViewRenderer
+                        coords={ coords }
                         payload={ payload }
                         paletteProvider={ MaxKnownDNA }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
@@ -61,7 +60,7 @@ export default function ControlPanel(props) {
                         clickHandler={ coords => setCoords(coords) }
                     />
                     <MaxKnownDNALegend/>
-                </div>*/}
+                </div>
 
                 <div>
                     <CellViewController coords={coords}/>
