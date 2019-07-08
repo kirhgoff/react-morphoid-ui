@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-export default function WorldView(props) {
+export default function WorldViewRenderer(props) {
     // ctx - context to paint
     // width - number of cells on axis x
     // height - number of cells on axis y
@@ -58,34 +58,62 @@ export default function WorldView(props) {
         ctx.putImageData(imageData, 0, 0);
     }
 
-    function translateClickToCell(event, canvas, cellClickHandler) {
+    function translateClickToCell(event, canvas) {
             const boundaries = canvas.getBoundingClientRect();
             const x = event.clientX - boundaries.left;
             const y = event.clientY - boundaries.top;
 
-            cellClickHandler({
+            return {
                 x: Math.trunc(x / props.cellWidth),
                 y: Math.trunc(y / props.cellHeight)
-            })
+            };
     }
 
     // Hooks go first
     const canvasRef = React.useRef(null);
+    // const [coords, setCoords] = React.useState({x: 0, y: 0});
+
+    function drawCrosshair(ctx, x, y, height, width) {
+        ctx.beginPath();
+        ctx.moveTo(x * props.cellWidth, 0);
+        ctx.lineTo(x * props.cellWidth, height * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo((x + 1) * props.cellWidth, 0);
+        ctx.lineTo((x + 1) * props.cellWidth, height * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, y * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, y * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, (y + 1) * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, (y + 1) * props.cellHeight);
+        ctx.stroke();
+    }
 
     if (props.payload) {
+        const {x, y} = props.coords;
         const {width, height, data} = props.payload; // TODO: return meta with min/max
 
         if (data) {
             const colors = props.paletteProvider(data);
             const ctx = canvasRef.current.getContext('2d');
             updateCanvas(ctx, width, height, colors);
+            drawCrosshair(ctx, x, y, height, width);
         }
     }
 
     return (
         <canvas
             onClick={
-                (e) => translateClickToCell(e, canvasRef.current, props.clickHandler)
+                (e) => {
+                    const result = translateClickToCell(e, canvasRef.current);
+                    props.clickHandler(result);
+                }
             }
             id="canvas_01"
             ref={canvasRef}
@@ -95,7 +123,7 @@ export default function WorldView(props) {
     );
 };
 
-WorldView.propTypes = {
+WorldViewRenderer.propTypes = {
     payload: PropTypes.shape({
         width: PropTypes.number,
         height: PropTypes.number,

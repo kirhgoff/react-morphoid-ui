@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 
-import WorldView from "./WorldView/WorldViewRenderer";
+import WorldViewRenderer from "./WorldView/WorldViewRenderer";
+import CellViewController from "./CellView/CellViewController";
+
 import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
 import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLegend";
-import CellViewController from "./CellView/CellViewController";
 import MaxKnownDNA from "./Palettes/MaxKnownDNA";
 import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
+
+
 // import HealthIsBrightness from "./Palettes/HealthIsBrightness";
 // import HealthIsBrightnessLegend from "./Palettes/HealthIsBrightnessLegend";
 const CELL_SIZE_IN_PIXELS = 10;
@@ -18,7 +21,7 @@ export default function ControlPanel(props) {
         <div>
             <h1>Oh, brave new world!</h1>
             <div>
-               2EARLY ACCESS: This server runs simulation of life.
+               EARLY ACCESS: This server runs simulation of life.
                Every cell of that field has its own DNA, which is like
                Turing machine - a set of 64 instructions to do basic
                actions on the field:
@@ -37,7 +40,8 @@ export default function ControlPanel(props) {
 
             <div className="main-view">
                 <div>
-                    <WorldView
+                    <WorldViewRenderer
+                        coords={ coords }
                         payload={ payload }
                         paletteProvider={ ReproduceAttacksPhotoRGB }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
@@ -47,7 +51,8 @@ export default function ControlPanel(props) {
                     <ReproduceAttackPhotoRGBLegend/>
                 </div>
                 <div>
-                    <WorldView
+                    <WorldViewRenderer
+                        coords={ coords }
                         payload={ payload }
                         paletteProvider={ MaxKnownDNA }
                         cellWidth={ CELL_SIZE_IN_PIXELS }

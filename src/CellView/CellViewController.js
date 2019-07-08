@@ -1,30 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CellDNARenderer from "./CellDNARenderer";
 
 export default function CellViewController(props) {
-    function reload() {
+    function reload(x, y, setPayload, setLoading) {
         fetch('/entity/' + x + '/' + y)
             .then(response => {
                 return response.json();
             })
             .then(payload => {
-                setPayload(payload);
+                // TODO: what to do if there is no cell?
+                if (payload) {
+                    setPayload(payload);
+                }
             })
             .catch(function (error) {
                 console.log('Error: >>>', error);
+            })
+            .finally(() => {
+                setTimeout(() => { setLoading(false) }, 1000)
             });
     }
 
+    const {x, y} = props.coords;
+
     const [payload, setPayload] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const x = props.coords.x;
-    const y = props.coords.y;
-
-    if (payload === null || x !== payload.x || y !== payload.y) {
-        reload();
-    } else {
-        setTimeout(() => {reload()},1000)
-    }
+    useEffect(() => {
+        if (!loading) {
+            setLoading(true);
+            reload(x, y, setPayload, setLoading);
+        }
+    });
 
     return (
         <CellDNARenderer payload={payload}/>

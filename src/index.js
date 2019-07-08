@@ -6,6 +6,8 @@ import './index.html';
 
 import WorldViewController from "./WorldView/WorldViewController";
 
+console.log("Starting Morphoid UI");
+console.log("====================");
 ReactDOM.render(
     <WorldViewController />,
     document.getElementById('root')
