@@ -58,19 +58,42 @@ export default function WorldViewRenderer(props) {
         ctx.putImageData(imageData, 0, 0);
     }
 
-    function translateClickToCell(event, canvas, cellClickHandler) {
+    function translateClickToCell(event, canvas) {
             const boundaries = canvas.getBoundingClientRect();
             const x = event.clientX - boundaries.left;
             const y = event.clientY - boundaries.top;
 
-            cellClickHandler({
+            return {
                 x: Math.trunc(x / props.cellWidth),
                 y: Math.trunc(y / props.cellHeight)
-            })
+            };
     }
 
     // Hooks go first
     const canvasRef = React.useRef(null);
+    const [coords, setCoords] = React.useState({x: 0, y: 0});
+
+    function drawCrosshair(ctx, height, width) {
+        ctx.beginPath();
+        ctx.moveTo(coords.x * props.cellWidth, 0);
+        ctx.lineTo(coords.x * props.cellWidth, height * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo((coords.x + 1) * props.cellWidth, 0);
+        ctx.lineTo((coords.x + 1) * props.cellWidth, height * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, coords.y * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, coords.y * props.cellHeight);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, (coords.y + 1) * props.cellHeight);
+        ctx.lineTo(width * props.cellWidth, (coords.y + 1) * props.cellHeight);
+        ctx.stroke();
+    }
 
     if (props.payload) {
         const {width, height, data} = props.payload; // TODO: return meta with min/max
@@ -79,13 +102,18 @@ export default function WorldViewRenderer(props) {
             const colors = props.paletteProvider(data);
             const ctx = canvasRef.current.getContext('2d');
             updateCanvas(ctx, width, height, colors);
+            drawCrosshair(ctx, height, width);
         }
     }
 
     return (
         <canvas
             onClick={
-                (e) => translateClickToCell(e, canvasRef.current, props.clickHandler)
+                (e) => {
+                    const result = translateClickToCell(e, canvasRef.current);
+                    props.clickHandler(result);
+                    setCoords(result);
+                }
             }
             id="canvas_01"
             ref={canvasRef}

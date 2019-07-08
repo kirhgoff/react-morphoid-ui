@@ -45,7 +45,10 @@ export default function ControlPanel(props) {
                         paletteProvider={ ReproduceAttacksPhotoRGB }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
                         cellHeight={ CELL_SIZE_IN_PIXELS }
-                        clickHandler={ coords => setCoords(coords) }
+                        clickHandler={ coords => {
+                            console.log("Setting coords: ", coords);
+                            setCoords(coords)
+                        } }
                     />
                     <ReproduceAttackPhotoRGBLegend/>
                 </div>

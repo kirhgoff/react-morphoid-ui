@@ -1,40 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CellDNARenderer from "./CellDNARenderer";
-import ControlPanel from "../ControlPanel";
 
-export default class CellViewController extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { x: 0, y: 0 };
-    }
+export default function CellViewController(props) {
+    console.log("Props:", props);
 
-    componentDidMount() {
-       setInterval( () => {this.reload()},1000);
-    }
+    function reload(setPayload) {
+        const { coords } = props;
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    reload() {
-        fetch('/entity/' + this.state.x + '/' + this.state.y)
+        fetch('/entity/' + coords.x + '/' + coords.y)
             .then(response => {
                 return response.json();
             })
             .then(payload => {
-                console.log("Fetching data");
-                this.setState({x: this.state.x, y: this.state.y, payload: payload});
+                console.log("Payload: ", payload);
+                // TODO: what to do if there is no cell?
+                if (payload) {
+                    setPayload(payload);
+                }
+                //setTimeout( () => {this.reload()},1000);
             })
             .catch(function (error) {
                 console.log('Error: >>>', error);
             });
     }
 
-    render() {
-        const { payload } = this.state;
+    const [payload, setPayload] = useState(null);
 
-        return (
-            <CellDNARenderer payload={payload}/>
-        );
-    }
+    useEffect(() => {
+        const timer = setInterval( () => {reload(setPayload)},1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <CellDNARenderer payload={payload}/>
+    );
 }
