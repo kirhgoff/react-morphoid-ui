@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 
-import WorldView from "./WorldView/WorldViewRenderer";
+import WorldViewRenderer from "./WorldView/WorldViewRenderer";
+import CellViewController from "./CellView/CellViewController";
+
 import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
 import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLegend";
-import CellViewController from "./CellView/CellViewController";
 import MaxKnownDNA from "./Palettes/MaxKnownDNA";
 import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
+
+
 // import HealthIsBrightness from "./Palettes/HealthIsBrightness";
 // import HealthIsBrightnessLegend from "./Palettes/HealthIsBrightnessLegend";
 const CELL_SIZE_IN_PIXELS = 10;
@@ -37,7 +40,7 @@ export default function ControlPanel(props) {
 
             <div className="main-view">
                 <div>
-                    <WorldView
+                    <WorldViewRenderer
                         payload={ payload }
                         paletteProvider={ ReproduceAttacksPhotoRGB }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
@@ -46,8 +49,8 @@ export default function ControlPanel(props) {
                     />
                     <ReproduceAttackPhotoRGBLegend/>
                 </div>
-                <div>
-                    <WorldView
+                {/* <div>
+                    <WorldViewRenderer
                         payload={ payload }
                         paletteProvider={ MaxKnownDNA }
                         cellWidth={ CELL_SIZE_IN_PIXELS }
@@ -55,7 +58,7 @@ export default function ControlPanel(props) {
                         clickHandler={ coords => setCoords(coords) }
                     />
                     <MaxKnownDNALegend/>
-                </div>
+                </div>*/}
 
                 <div>
                     <CellViewController coords={coords}/>

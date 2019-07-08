@@ -1,32 +1,40 @@
 import React, { useState } from "react";
 import CellDNARenderer from "./CellDNARenderer";
+import ControlPanel from "../ControlPanel";
 
-export default function CellViewController(props) {
-    function reload() {
-        fetch('/entity/' + x + '/' + y)
+export default class CellViewController extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { x: 0, y: 0 };
+    }
+
+    componentDidMount() {
+       setInterval( () => {this.reload()},1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    reload() {
+        fetch('/entity/' + this.state.x + '/' + this.state.y)
             .then(response => {
                 return response.json();
             })
             .then(payload => {
-                setPayload(payload);
+                console.log("Fetching data");
+                this.setState({x: this.state.x, y: this.state.y, payload: payload});
             })
             .catch(function (error) {
                 console.log('Error: >>>', error);
             });
     }
 
-    const [payload, setPayload] = useState(null);
+    render() {
+        const { payload } = this.state;
 
-    const x = props.coords.x;
-    const y = props.coords.y;
-
-    if (payload === null || x !== payload.x || y !== payload.y) {
-        reload();
-    } else {
-        setTimeout(() => {reload()},1000)
+        return (
+            <CellDNARenderer payload={payload}/>
+        );
     }
-
-    return (
-        <CellDNARenderer payload={payload}/>
-    );
 }

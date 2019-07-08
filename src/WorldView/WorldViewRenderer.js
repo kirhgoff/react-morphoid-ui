@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-export default function WorldView(props) {
+export default function WorldViewRenderer(props) {
     // ctx - context to paint
     // width - number of cells on axis x
     // height - number of cells on axis y
@@ -95,7 +95,7 @@ export default function WorldView(props) {
     );
 };
 
-WorldView.propTypes = {
+WorldViewRenderer.propTypes = {
     payload: PropTypes.shape({
         width: PropTypes.number,
         height: PropTypes.number,

@@ -6,6 +6,7 @@ import './index.html';
 
 import WorldViewController from "./WorldView/WorldViewController";
 
+console.log("Started-------");
 ReactDOM.render(
     <WorldViewController />,
     document.getElementById('root')
