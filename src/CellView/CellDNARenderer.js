@@ -10,16 +10,16 @@ const KNOWN_GENES=new Map([
     [31, "photosynthesis"]
 ]);
 
-export default function CellDNARenderer(props) {
-    function description(gene) {
-        const value = KNOWN_GENES.get(gene);
-        if (value !== undefined) {
-            return value
-        } else {
-            return ""
-        }
+function description(gene) {
+    const value = KNOWN_GENES.get(gene);
+    if (value !== undefined) {
+        return value
+    } else {
+        return ""
     }
+}
 
+export default function CellDNARenderer(props) {
     if (props.payload) {
         const {
             x, y, health, direction, genome_id, genome

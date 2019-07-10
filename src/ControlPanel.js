@@ -7,14 +7,15 @@ import ReproduceAttacksPhotoRGB from './Palettes/ReproduceAttacksPhotoRGB'
 import ReproduceAttackPhotoRGBLegend from "./Palettes/ReproduceAttackPhotoRGBLegend";
 import MaxKnownDNA from "./Palettes/MaxKnownDNA";
 import MaxKnownDNALegend from "./Palettes/MaxKnownDNALegend";
-
-
+import PausePlay from "./WorldControls/PausePlay";
 // import HealthIsBrightness from "./Palettes/HealthIsBrightness";
 // import HealthIsBrightnessLegend from "./Palettes/HealthIsBrightnessLegend";
+
 const CELL_SIZE_IN_PIXELS = 10;
 
 export default function ControlPanel(props) {
     const [coords, setCoords] = useState({x: 0, y: 0});
+    //const [palette, setPalette] = useState(MaxKnownDNA);
     const {payload} = props;
 
     return (
@@ -65,6 +66,10 @@ export default function ControlPanel(props) {
                 <div>
                     <CellViewController coords={coords}/>
                 </div>
+                {/*<div>*/}
+                {/*    <PausePlay clickHandler={(action) => console.log(action)}/>*/}
+                {/*    <WorldSettingsReset/>*/}
+                {/*</div>*/}
             </div>
         </div>
     );
