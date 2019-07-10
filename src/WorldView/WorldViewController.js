@@ -1,5 +1,5 @@
 import React from "react";
-import ControlPanel from "../ControlPanel";
+import ControlPanel from "../WorldControls/ControlPanel";
 
 export default class WorldViewController extends React.Component {
     constructor(props) {

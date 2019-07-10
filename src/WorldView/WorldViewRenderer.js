@@ -32,34 +32,10 @@ function updateCanvas(ctx, inputData, fieldWidth, fieldHeight, cellWidth, cellHe
         if ((inputDataIndex + 1) % fieldWidth === 0) {
             imageDataIndex += 4 * imageWidth * (cellHeight - 1);
         }
-
-        // imageDataIndex = moveToNextCell(
-        //     imageDataIndex,
-        //     inputDataIndex,
-        //     fieldWidth,
-        //     imageWidth,
-        //     cellWidth,
-        //     cellHeight
-        // );
-
     }
 
     ctx.putImageData(imageData, 0, 0);
 }
-
-// function moveToNextCell(imageDataIndex, inputDataIndex, fieldWidth, imageWidth, cellWidth, cellHeight) {
-//     // we are moving right by 4*cellWidth
-//     // when we reach right side, we go to the next line
-//     // jumping down by cellHeight - 1
-//     imageDataIndex += 4 * cellWidth;
-//
-//     if ((inputDataIndex + 1) % fieldWidth === 0) {
-//         imageDataIndex += 4 * imageWidth * (cellHeight - 1);
-//     }
-//     return imageDataIndex;
-// }
-
-
 
 function translateClickToCell(event, canvas, cellWidth, cellHeight) {
     const boundaries = canvas.getBoundingClientRect();
