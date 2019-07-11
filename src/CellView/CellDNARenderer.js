@@ -19,6 +19,18 @@ function description(gene) {
     }
 }
 
+function GeneView(props) {
+    const {index, gene} = props;
+    const desc = description(gene);
+    const label = desc ? desc : gene;
+    return (
+        <li className="bordered">
+            <div className="index">{index}</div>
+            <div className={"value " + desc}>{label}</div>
+        </li>
+    );
+}
+
 export default function CellDNARenderer(props) {
     if (props.payload) {
         const {
@@ -33,16 +45,14 @@ export default function CellDNARenderer(props) {
                     <li>y: { y }</li>
                     <li>health: { health }</li>
                     <li>direction: { direction }</li>
-                    <li>genome:
-                        <ul className="genome no-discs">
-                            {genome.map((gene, index) => (
-                                <li className="bordered" key={index}>
-                                    <div className="index">{index}</div>
-                                    <div className={"value " + description(gene)}>{description(gene) ? description(gene) : gene}</div>
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
+                </ul>
+
+                <ul className="genome no-discs">
+                    {genome.map((gene, index) => {
+                        // TODO: use queue to pass values to next GeneView
+                        //  if it is a sense or move or turn
+                        return <GeneView  key={index} index={index} gene={gene}/>;
+                    })}
                 </ul>
             </div>
         );

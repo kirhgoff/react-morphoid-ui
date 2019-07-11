@@ -8,9 +8,11 @@ export default function WorldPaletteChooser(props) {
     return (
         <div className="palette-chooser">
             {palettes.map(([title, obj]) => (
-                <div className={{"bordered": title === initial}} key={title} onClick={(_) => {
-                    props.selectHandler(obj)
-                }}>{title}</div>
+                <div
+                    key={title}
+                    onClick={() => { props.selectHandler(obj) }}>
+                    {title === initial ? '[' + title + ']' :  ' ' + title + ' ' }
+                </div>
             ))}
         </div>
     );

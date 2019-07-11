@@ -34,10 +34,11 @@ function morphoidEarlyAccessDescription() {
 }
 
 const CELL_SIZE_IN_PIXELS = 10;
+// TODO: fix redundant key
 const PALETTES = [
-    ["max known dna", {provider: MaxKnownDNA, legend: MaxKnownDNALegend}],
-    ["rgb as reproduce, attack, photo", {provider: ReproduceAttacksPhotoRGB, legend: ReproduceAttackPhotoRGBLegend}],
-    ["health is brightness", {provider: HealthIsBrightness, legend: HealthIsBrightnessLegend}]
+    ["max known dna", {label: "max known dna", provider: MaxKnownDNA, legend: MaxKnownDNALegend}],
+    ["rgb as reproduce, attack, photo", {label: "rgb as reproduce, attack, photo", provider: ReproduceAttacksPhotoRGB, legend: ReproduceAttackPhotoRGBLegend}],
+    ["health is brightness", {label: "health is brightness", provider: HealthIsBrightness, legend: HealthIsBrightnessLegend}]
 ];
 
 export default function ControlPanel(props) {
@@ -51,7 +52,7 @@ export default function ControlPanel(props) {
         <div>
             <h1>Oh, brave new world!</h1>
             {morphoidEarlyAccessDescription()}
-            <WorldPaletteChooser palettes={PALETTES} initial={palette} selectHandler={setPalette}/>
+            <WorldPaletteChooser palettes={PALETTES} initial={palette.label} selectHandler={setPalette}/>
             <div className="main-view">
                 <div>
                     <WorldViewRenderer
@@ -75,12 +76,3 @@ export default function ControlPanel(props) {
         </div>
     );
 }
-    //<div className="in-a-row">
-    //                     <WorldView payload={ payload } paletteProvider={ HealthIsBrightness }/>
-    //                     <HealthIsBrightnessLegend/>
-    //                 </div>
-    //                    <div className="in-a-row">
-    //                         <WorldView payload={ payload } paletteProvider={ MaxKnownDNA }/>
-    //                         <MaxKnownDNALegend/>
-    //                     </div>
-

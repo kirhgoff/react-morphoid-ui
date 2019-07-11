@@ -105,6 +105,15 @@ ol, ul {
   width: 100%;
 }
 
+.palette-chooser {
+  display: flex;
+}
+
+.palette-chooser div {
+  margin: 1em;
+}
+
+/* Colors */
 .defile {
   background-color: #F0B8F0;
 }
