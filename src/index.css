@@ -63,8 +63,6 @@ ol, ul {
 
 .legend div {
   margin: 5px;
-  /*max-width: 200px; TODO: Why this does not work?*/
-
 }
 
 .legend span {
@@ -74,14 +72,13 @@ ol, ul {
   margin: 2px;
 }
 
-.main-view {
-  display: flex;
-  /*justify-content: space-evenly;*/
-}
+/*.main-view {*/
+/*  display: flex;*/
+/*}*/
 
-.main-view div {
-  margin: 10px;
-}
+/*.main-view div {*/
+/*  margin: 10px;*/
+/*}*/
 
 .genome li {
   display: flex;
@@ -152,4 +149,12 @@ hr {
 
 .selected {
   font-weight: bolder;
+}
+
+.slider-group {
+  min-width: 400px;
+}
+
+.slider {
+  display: flex;
 }

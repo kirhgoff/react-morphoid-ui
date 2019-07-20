@@ -17,7 +17,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(htm|html|css)$/,
+        test: /\.(htm|html)$/,
         use: {
           loader: "file-loader",
           options: {
@@ -25,6 +25,10 @@ module.exports = {
             outputPath: '/'
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
