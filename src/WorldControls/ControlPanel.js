@@ -10,7 +10,7 @@ import MaxKnownDNALegend from "../Palettes/MaxKnownDNALegend";
 import HealthIsBrightness from "../Palettes/HealthIsBrightness";
 import HealthIsBrightnessLegend from "../Palettes/HealthIsBrightnessLegend";
 
-import PausePlay from "./PausePlay";
+import UpdateSettingsButton from "./UpdateSettingsButton";
 import WorldPaletteChooser from "./WorldPaletteChooser";
 
 const CELL_SIZE_IN_PIXELS = 10;
@@ -44,12 +44,11 @@ export default function ControlPanel(props) {
                     <LegendTagName/>
                 </div>
                 <div>
+                    <UpdateSettingsButton/>
+                </div>
+                <div>
                     <CellViewController coords={coords}/>
                 </div>
-                {/*<div>*/}
-                {/*    <PausePlay clickHandler={(action) => console.log(action)}/>*/}
-                {/*    <WorldSettingsReset/>*/}
-                {/*</div>*/}
             </div>
         </div>
     );
