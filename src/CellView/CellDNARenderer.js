@@ -1,5 +1,10 @@
 import React from 'react';
 
+const GENE_COMPLEXITY = new Map([
+    [26, ["if nothing", "if cell", "if corpse"]],
+    [27, ["turn to"]],
+]);
+
 const KNOWN_GENES=new Map([
     [25, "defile"],
     [26, "sense"],
@@ -22,11 +27,11 @@ function description(gene) {
 function GeneView(props) {
     const {index, gene} = props;
     const desc = description(gene);
-    const label = desc ? desc : gene;
+    const text = desc ? desc : gene;
     return (
         <li className="bordered">
             <div className="index">{index}</div>
-            <div className={"value " + desc}>{label}</div>
+            <div className={"value " + desc}>{text}</div>
         </li>
     );
 }
@@ -51,7 +56,7 @@ export default function CellDNARenderer(props) {
                     {genome.map((gene, index) => {
                         // TODO: use queue to pass values to next GeneView
                         //  if it is a sense or move or turn
-                        return <GeneView  key={index} index={index} gene={gene}/>;
+                        return <GeneView key={index} index={index} gene={gene}/>;
                     })}
                 </ul>
             </div>

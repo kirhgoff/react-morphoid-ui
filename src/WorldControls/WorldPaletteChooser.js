@@ -3,15 +3,17 @@ import PropTypes from "prop-types";
 import WorldViewRenderer from "../WorldView/WorldViewRenderer";
 
 export default function WorldPaletteChooser(props) {
-    const { palettes, initial } = props;
+    const { palettes, selected } = props;
 
     return (
         <div className="palette-chooser">
             {palettes.map(([title, obj]) => (
                 <div
                     key={title}
-                    onClick={() => { props.selectHandler(obj) }}>
-                    {title === initial ? '[' + title + ']' :  ' ' + title + ' ' }
+                    onClick={() => { props.selectHandler(obj) }}
+                    className={title === selected ? "selected" : "not-selected"}
+                >
+                    {title === selected ? '[' + title + ']' :  ' ' + title + ' ' }
                 </div>
             ))}
         </div>
@@ -19,7 +21,7 @@ export default function WorldPaletteChooser(props) {
 }
 
 WorldPaletteChooser.propTypes = {
-    initial: PropTypes.string.isRequired,
+    selected: PropTypes.string.isRequired,
     palettes: PropTypes.arrayOf(PropTypes.any),
     selectHandler: PropTypes.func.isRequired
 };

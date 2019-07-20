@@ -142,3 +142,14 @@ ol, ul {
   background-color: #DBD8D4;
 }
 
+h1 {
+  text-align: center;
+}
+
+hr {
+  border: solid black 1px;
+}
+
+.selected {
+  font-weight: bolder;
+}

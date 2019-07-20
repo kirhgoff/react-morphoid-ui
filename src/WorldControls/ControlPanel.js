@@ -13,26 +13,6 @@ import HealthIsBrightnessLegend from "../Palettes/HealthIsBrightnessLegend";
 import PausePlay from "./PausePlay";
 import WorldPaletteChooser from "./WorldPaletteChooser";
 
-function morphoidEarlyAccessDescription() {
-    return <div>
-        EARLY ACCESS: This server runs simulation of life.
-        Every cell of that field has its own DNA, which is like
-        Turing machine - a set of 64 instructions to do basic
-        actions on the field:
-        turn, move, attack, reproduce (parthenogenesis).
-        Each birth has a probability to mutate one gene
-        and change it to
-        some random number below 64, which is
-        simply a jump instruction to go to other gene.
-        Below is me tinkering with control panel to
-        play with the server. I am playing with it to learn
-        awesome programming language
-        &nbsp;<a href="https://github.com/kirhgoff/rust-morhoid">Rust</a> and
-        new modern ways of building frontend using
-        &nbsp;<a href="https://github.com/kirhgoff/react-morphoid-ui">React</a>.
-    </div>;
-}
-
 const CELL_SIZE_IN_PIXELS = 10;
 // TODO: fix redundant key
 const PALETTES = [
@@ -50,9 +30,7 @@ export default function ControlPanel(props) {
 
     return (
         <div>
-            <h1>Oh, brave new world!</h1>
-            {morphoidEarlyAccessDescription()}
-            <WorldPaletteChooser palettes={PALETTES} initial={palette.label} selectHandler={setPalette}/>
+            <WorldPaletteChooser palettes={PALETTES} selected={palette.label} selectHandler={setPalette}/>
             <div className="main-view">
                 <div>
                     <WorldViewRenderer
