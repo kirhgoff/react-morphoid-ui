@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react';
 
-function updateSettings() {
-    fetch('/update_settings')
-        .catch(function(error) {
-            console.log('Error: >>>', error);
-        });
+function updateSettings(settings) {
+    fetch('/world/settings/update', {
+        method: 'post',
+        body: JSON.stringify(settings)
+    })
+    .catch(error => console.log('Error: >>>', error));
 }
 
-function loadSettings(handler) {
+function getSettings(handler) {
     fetch('/world/settings/get')
-        .then(response => {
-            return response.json();
-        })
-        .then(payload => handler(payload))
-        .catch(function(error) {
-            console.log('Error: >>>', error);
-        });
+    .then(response => response.json())
+    .then(payload => handler(payload))
+    .catch(error => console.log('Error: >>>', error));
 }
 
 export default function SettingsPanel() {
     const [settings, setSettings] = useState({reproduce_threshold: 0});
-    useEffect(() => { loadSettings(setSettings) },[]);
+    useEffect(() => { getSettings(setSettings) },[]);
     return (
         <div>
-            <div onClick={() => {updateSettings()}} className="bordered">Update settings</div>
+            <div onClick={() => {updateSettings(settings)}} className="bordered">Update settings</div>
             <div className="slider-group">
                 <div id="slider_reproduce_threshold" className="slider">
                     <div>Reproduce threshold:</div>

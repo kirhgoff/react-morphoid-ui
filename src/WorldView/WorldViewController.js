@@ -17,13 +17,9 @@ export default class WorldViewController extends React.Component {
 
     reload() {
         fetch('/world/get')
-            .then(response => {
-                return response.json();
-            })
-            .then(payload => this.setState({payload: payload}))
-            .catch(function(error) {
-                console.log('Error: >>>', error);
-            });
+        .then(response => response.json())
+        .then(payload => this.setState({payload: payload}))
+        .catch(error => console.log('Error: >>>', error));
     }
 
     render() {
