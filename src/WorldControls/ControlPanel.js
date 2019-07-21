@@ -10,10 +10,12 @@ import MaxKnownDNALegend from "../Palettes/MaxKnownDNALegend";
 import HealthIsBrightness from "../Palettes/HealthIsBrightness";
 import HealthIsBrightnessLegend from "../Palettes/HealthIsBrightnessLegend";
 
-import UpdateSettingsButton from "./UpdateSettingsButton";
+import SettingsPanel from "./SettingsPanel";
 import WorldPaletteChooser from "./WorldPaletteChooser";
 
 const CELL_SIZE_IN_PIXELS = 10;
+
+// TODO: move to palette chooser
 // TODO: fix redundant key
 const PALETTES = [
     ["max known dna", {label: "max known dna", provider: MaxKnownDNA, legend: MaxKnownDNALegend}],
@@ -44,7 +46,7 @@ export default function ControlPanel(props) {
                     <LegendTagName/>
                 </div>
                 <div>
-                    <UpdateSettingsButton/>
+                    <SettingsPanel/>
                 </div>
                 <div>
                     <CellViewController coords={coords}/>

@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-import "react-input-range/lib/css/index.css";
+import React, { useState, useEffect } from 'react';
 
 function updateSettings() {
     fetch('/update_settings')
@@ -9,8 +7,20 @@ function updateSettings() {
         });
 }
 
-export default function UpdateSettingsButton() {
+function loadSettings(handler) {
+    fetch('/world/settings/get')
+        .then(response => {
+            return response.json();
+        })
+        .then(payload => handler(payload))
+        .catch(function(error) {
+            console.log('Error: >>>', error);
+        });
+}
+
+export default function SettingsPanel() {
     const [settings, setSettings] = useState({reproduce_threshold: 0});
+    useEffect(() => { loadSettings(setSettings) },[]);
     return (
         <div>
             <div onClick={() => {updateSettings()}} className="bordered">Update settings</div>
