@@ -46,10 +46,10 @@ export default function ControlPanel(props) {
                     <LegendTagName/>
                 </div>
                 <div>
-                    <SettingsPanel/>
+                    <CellViewController coords={coords}/>
                 </div>
                 <div>
-                    <CellViewController coords={coords}/>
+                    <SettingsPanel/>
                 </div>
             </div>
         </div>
