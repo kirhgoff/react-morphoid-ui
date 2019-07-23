@@ -20,6 +20,14 @@ function getSettings(handler) {
     .finally(() => console.log("got settings..."));
 }
 
+function resetWorld() {
+    fetch('/world/reset', {
+        method: 'post'
+    })
+    .catch(error => console.log('>>>> Error:', error))
+    .finally(() => console.log("reset world..."));
+}
+
 const SLIDERS = [
     //["reproduce_threshold", {min: 0, max: 100, desc: "Reproduce threshold"}],
 
@@ -35,13 +43,13 @@ const SLIDERS = [
     ["photosynthesis_adds", {min: 0, max: 1000, desc: "Photosynthesis adds per cycle"}],
     ["attack_damage", {min: 0, max: 1000, desc: "Attack damage"}],
     ["defile_damage", {min: 0, max: 1000, desc: "Corpse consume gain per bite"}],
-    ["corpse_decay", {min: -1000, max: 0, desc: "Corpse energy dissipation per cycle"}],
+    ["corpse_decay", {min: -1000, max: 0, desc: "Corpse energy dissipation"}],
 ];
 
 function SettingValueSlider({ settings, setSettings, slider_name, slider_info }) {
     return (
         <div id={slider_name} className="slider">
-            <div>{slider_info.desc}</div>
+            <div className="slider-desc">{slider_info.desc}</div>
             <input
                    type="range"
                    min={slider_info.min}
@@ -67,7 +75,9 @@ export default function SettingsPanel() {
     if (settings) {
         return (
             <div>
-                <div onClick={() => updateSettings(settings)} className="bordered">Update settings</div>
+                <div onClick={() => updateSettings(settings)} className="button">Update settings</div>
+                <div onClick={() => getSettings(setSettings)} className="button">Load settings</div>
+                <div onClick={() => resetWorld()} className="button">Reset world</div>
                 <div className="slider-group">
                     {SLIDERS.map((info) => {
                         const slider_name = info[0];

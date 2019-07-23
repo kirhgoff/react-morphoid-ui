@@ -151,10 +151,29 @@ hr {
   font-weight: bolder;
 }
 
-.slider-group {
-  min-width: 400px;
+.slider-group div {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .slider {
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 100px 80px;
+
+}
+
+.slider:hover div{
+  font-weight: bold;
+}
+
+.slider-desc {
+  text-align: right;
+}
+
+.button {
+  display: inline-block;
+  border: solid 1px black;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
 }
