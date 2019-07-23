@@ -72,30 +72,28 @@ ol, ul {
   margin: 2px;
 }
 
-/*.main-view {*/
-/*  display: flex;*/
-/*}*/
-
-/*.main-view div {*/
-/*  margin: 10px;*/
-/*}*/
-
-.genome li {
+.genome div {
   display: flex;
   align-items: stretch;
+  margin: 0;
+  /*outline: solid black 1px;*/
+  /*outline: 1px black solid;*/
 }
 
 .genome .index {
-  border-right: 1px black solid;
+  outline: 1px black solid;
   width: 2em;
-  margin: 0px;
+  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /*justify-content: center;*/
+  /*background-color: red;*/
+  border: 0;
 }
 
 .genome .value {
-  margin: 0px;
+  outline: 1px black solid;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,4 +174,20 @@ hr {
   text-align: center;
   padding: 1em;
   border-radius: 1em;
+}
+
+.cell-info {
+  border: solid black 1px;
+}
+
+.cell-info div {
+  margin: 0 1em;
+  text-align: center;
+}
+
+.cell-info h3 {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  white-space: nowrap
 }

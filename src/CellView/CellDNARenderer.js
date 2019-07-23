@@ -1,9 +1,9 @@
 import React from 'react';
 
-const GENE_COMPLEXITY = new Map([
-    [26, ["if nothing", "if cell", "if corpse"]],
-    [27, ["turn to"]],
-]);
+// const GENE_COMPLEXITY = new Map([
+//     [26, ["if nothing", "if cell", "if corpse"]],
+//     [27, ["turn to"]],
+// ]);
 
 const KNOWN_GENES=new Map([
     [25, "defile"],
@@ -29,10 +29,10 @@ function GeneView(props) {
     const desc = description(gene);
     const text = desc ? desc : gene;
     return (
-        <li className="bordered">
+        <div>
             <div className="index">{index}</div>
             <div className={"value " + desc}>{text}</div>
-        </li>
+        </div>
     );
 }
 
@@ -44,21 +44,23 @@ export default function CellDNARenderer(props) {
 
         return (
             <div>
-                <h3>Cell # { genome_id }</h3>
-                <ul>
-                    <li>x: { x }</li>
-                    <li>y: { y }</li>
-                    <li>health: { health }</li>
-                    <li>direction: { direction }</li>
-                </ul>
 
-                <ul className="genome no-discs">
+                <div className="cell-info">
+                    <h3>Cell # { genome_id }</h3>
+                    <div>x: { x }</div>
+                    <div>y: { y }</div>
+                    <div>health: { health }</div>
+                    <div>direction: { direction }</div>
+                    <div>&nbsp;</div>
+                </div>
+
+                <div className="genome no-discs">
                     {genome.map((gene, index) => {
                         // TODO: use queue to pass values to next GeneView
                         //  if it is a sense or move or turn
                         return <GeneView key={index} index={index} gene={gene}/>;
                     })}
-                </ul>
+                </div>
             </div>
         );
     } else {
