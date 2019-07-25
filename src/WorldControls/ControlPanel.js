@@ -24,7 +24,7 @@ const PALETTES = [
 ];
 
 export default function ControlPanel(props) {
-    const [coords, setCoords] = useState({x: 0, y: 0});
+    const [coords, setCoords] = useState({x: 20, y: 20});
     const [palette, setPalette] = useState(PALETTES[0][1]);
     const {payload} = props;
 

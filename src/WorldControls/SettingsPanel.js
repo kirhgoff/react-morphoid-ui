@@ -15,7 +15,7 @@ function updateSettings(settings) {
 function getSettings(handler) {
     fetch('/world/settings/get')
     .then(response => response.json())
-    .then(payload => {console.log("Payload:", payload); handler(payload)})
+    .then(payload => handler(payload))
     .catch(error => console.log('>>>> Error:', error))
     .finally(() => console.log("got settings..."));
 }
@@ -96,7 +96,6 @@ export default function SettingsPanel() {
             </div>
         );
     } else {
-        // TODO: add loading style
-        return (<div>Loading...</div>);
+        return (<div className="loading">Loading...</div>);
     }
 }

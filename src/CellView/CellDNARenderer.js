@@ -5,7 +5,7 @@ import React from 'react';
 //     [27, ["turn to"]],
 // ]);
 
-const KNOWN_GENES=new Map([
+const KNOWN_GENES = new Map([
     [25, "defile"],
     [26, "sense"],
     [27, "turn"],
@@ -13,6 +13,17 @@ const KNOWN_GENES=new Map([
     [29, "attack"],
     [30, "reproduce"],
     [31, "photosynthesis"]
+]);
+
+const DIRECTIONS = new Map([
+    [0, "↑"],
+    [1, "↗"],
+    [2, "→"],
+    [3, "↘"],
+    [4, "↓"],
+    [5, "↙"],
+    [6, "←"],
+    [7, "↖"],
 ]);
 
 function description(gene) {
@@ -50,7 +61,7 @@ export default function CellDNARenderer(props) {
                     <div>x: { x }</div>
                     <div>y: { y }</div>
                     <div>health: { health }</div>
-                    <div>direction: { direction }</div>
+                    <div>direction: { DIRECTIONS.get(direction) }</div>
                     <div>&nbsp;</div>
                 </div>
 
@@ -64,6 +75,6 @@ export default function CellDNARenderer(props) {
             </div>
         );
     } else {
-        return <div>No cell here...</div>
+        return <div className="loading">No cell here...</div>
     }
 }
