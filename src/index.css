@@ -159,8 +159,7 @@ hr {
 
 .slider {
   display: grid;
-  grid-template-columns: 250px 100px 80px;
-
+  grid-template-columns: 220px 150px 50px;
 }
 
 .slider:hover div{
@@ -193,4 +192,12 @@ hr {
   margin-left: 1em;
   margin-right: 1em;
   white-space: nowrap
+}
+
+.button-set {
+  float: right;
+}
+
+.settings-header {
+  text-align: center;
 }

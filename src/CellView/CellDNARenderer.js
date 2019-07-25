@@ -64,6 +64,6 @@ export default function CellDNARenderer(props) {
             </div>
         );
     } else {
-        return <div>Fetching....</div>
+        return <div>No cell here...</div>
     }
 }

@@ -76,9 +76,7 @@ export default function SettingsPanel() {
     if (settings) {
         return (
             <div>
-                <div onClick={() => updateSettings(settings)} className="button">Update settings</div>
-                <div onClick={() => getSettings(setSettings)} className="button">Load settings</div>
-                <div onClick={() => resetWorld()} className="button">Reset world</div>
+                <h3 className="settings-header">World conditions: be careful</h3>
                 <div className="slider-group">
                     {SLIDERS.map((info) => {
                         const slider_name = info[0];
@@ -89,6 +87,11 @@ export default function SettingsPanel() {
                             {...{ settings, setSettings, slider_name, slider_info }}
                         />
                     })}
+                </div>
+                <div className="button-set">
+                    <div onClick={() => updateSettings(settings)} className="button">Update settings</div>
+                    <div onClick={() => getSettings(setSettings)} className="button">Load settings</div>
+                    <div onClick={() => resetWorld()} className="button">Reset world</div>
                 </div>
             </div>
         );
