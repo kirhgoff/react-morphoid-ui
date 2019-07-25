@@ -29,21 +29,19 @@ function resetWorld() {
 }
 
 const SLIDERS = [
-    //["reproduce_threshold", {min: 0, max: 100, desc: "Reproduce threshold"}],
-
     ["reproduce_cost", {min: -1000, max: 0, desc: "Reproduce cost"}],
     ["attack_cost", {min: -1000, max: 0, desc: "Attack cost"}],
     ["move_cost", {min: -1000, max: 0, desc: "Move cost"}],
     ["turn_cost", {min: -1000, max: 0, desc: "Turn cost"}],
     ["sense_cost", {min: -1000, max: 0, desc: "Sense cost"}],
     ["defile_cost", {min: -1000, max: 0, desc: "Defile cost"}],
-
     ["corpse_initial", {min: 0, max: 1000, desc: "Initial corpse energy"}],
     ["initial_cell_health", {min: 0, max: 1000, desc: "Initial cell health"}],
     ["photosynthesis_adds", {min: 0, max: 1000, desc: "Photosynthesis adds per cycle"}],
     ["attack_damage", {min: 0, max: 1000, desc: "Attack damage"}],
     ["defile_damage", {min: 0, max: 1000, desc: "Corpse consume gain per bite"}],
     ["corpse_decay", {min: -1000, max: 0, desc: "Corpse energy dissipation"}],
+    ["mutation_probability", {min: 0, max: 1.0, desc: "Mutation probability"}],
 ];
 
 function SettingValueSlider({ settings, setSettings, slider_name, slider_info }) {
