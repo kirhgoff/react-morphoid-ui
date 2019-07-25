@@ -1,52 +1,9 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
 }
 
-ol, ul {
-  padding-left: 30px;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
-
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
-}
-
-.square:focus {
-  outline: none;
-}
-
-.kbd-navigation .square:focus {
-  background: #ddd;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
+canvas {
+  cursor: crosshair;
 }
 
 .bordered {
@@ -63,8 +20,6 @@ ol, ul {
 
 .legend div {
   margin: 5px;
-  /*max-width: 200px; TODO: Why this does not work?*/
-
 }
 
 .legend span {
@@ -74,37 +29,46 @@ ol, ul {
   margin: 2px;
 }
 
-.main-view {
-  display: flex;
-  /*justify-content: space-evenly;*/
-}
-
-.main-view div {
-  margin: 10px;
-}
-
-.genome li {
+.genome > div {
   display: flex;
   align-items: stretch;
+  margin: 0;
+}
+
+.genome > div:last-child {
+  border-bottom: 1px black solid;
 }
 
 .genome .index {
-  border-right: 1px black solid;
+  border: 1px black solid;
   width: 2em;
-  margin: 0px;
+  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  border-right: 0;
+  border-bottom: 0;
 }
 
 .genome .value {
-  margin: 0px;
+  border: 1px black solid;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  border-bottom: 0;
 }
 
+.palette-chooser {
+  display: flex;
+  cursor: pointer;
+}
+
+.palette-chooser div {
+  margin: 1em;
+}
+
+/* Colors */
 .defile {
   background-color: #F0B8F0;
 }
@@ -133,3 +97,69 @@ ol, ul {
   background-color: #DBD8D4;
 }
 
+h1 {
+  text-align: center;
+}
+
+hr {
+  border: solid black 1px;
+}
+
+.selected {
+  font-weight: bolder;
+}
+
+.slider-group div {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.slider {
+  display: grid;
+  grid-template-columns: 220px 150px 50px;
+}
+
+.slider:hover div{
+  font-weight: bold;
+}
+
+.slider-desc {
+  text-align: right;
+}
+
+.button {
+  display: inline-block;
+  border: solid 1px black;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.cell-info {
+  border: solid black 1px;
+}
+
+.cell-info div {
+  margin: 0 1em;
+  text-align: center;
+}
+
+.cell-info h3 {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  white-space: nowrap
+}
+
+.button-set {
+  float: right;
+}
+
+.settings-header {
+  text-align: center;
+}
+
+.loading {
+  white-space: nowrap
+}
