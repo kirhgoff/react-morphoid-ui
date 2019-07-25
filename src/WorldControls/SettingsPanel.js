@@ -41,10 +41,13 @@ const SLIDERS = [
     ["attack_damage", {min: 0, max: 1000, desc: "Attack damage"}],
     ["defile_damage", {min: 0, max: 1000, desc: "Corpse consume gain per bite"}],
     ["corpse_decay", {min: -1000, max: 0, desc: "Corpse energy dissipation"}],
-    ["mutation_probability", {min: 0, max: 1.0, desc: "Mutation probability"}],
+    ["mutation_probability", {min: 0, max: 100, desc: "Mutation probability", scale: 0.01}],
 ];
 
 function SettingValueSlider({ settings, setSettings, slider_name, slider_info }) {
+    const scale = slider_info.scale ? slider_info.scale : 1;
+    const currentValue = settings[slider_name] / scale;
+
     return (
         <div id={slider_name} className="slider">
             <div className="slider-desc">{slider_info.desc}</div>
@@ -53,9 +56,9 @@ function SettingValueSlider({ settings, setSettings, slider_name, slider_info })
                    min={slider_info.min}
                    max={slider_info.max}
                    step="1"
-                   value={settings[slider_name]}
+                   value={currentValue}
                    onChange={event => {
-                       const value = event.target.value;
+                       const value = event.target.value * scale;
                        setSettings(settings => {
                            return { ...settings, [slider_name]: Number(value) };
                        })

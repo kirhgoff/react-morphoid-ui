@@ -72,32 +72,35 @@ ol, ul {
   margin: 2px;
 }
 
-.genome div {
+.genome > div {
   display: flex;
   align-items: stretch;
   margin: 0;
-  /*outline: solid black 1px;*/
-  /*outline: 1px black solid;*/
+}
+
+.genome > div:last-child {
+  border-bottom: 1px black solid;
+
 }
 
 .genome .index {
-  outline: 1px black solid;
+  border: 1px black solid;
   width: 2em;
   margin: 0;
   display: flex;
   align-items: center;
-  /*justify-content: center;*/
-  /*background-color: red;*/
-  border: 0;
+  border-right: 0;
+  border-bottom: 0;
 }
 
 .genome .value {
-  outline: 1px black solid;
+  border: 1px black solid;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  border-bottom: 0;
 }
 
 .palette-chooser {
